@@ -74,4 +74,19 @@ namespace WpfDemoApp
             Users = new ObservableCollection<string>(userList);
         }
     }
+
+    public class WelcomeLineModel : SimpleLineItemModel
+    {
+        public WelcomeLineModel() : base()
+        {
+            DisplayName = "Willkommen!";
+        }
+    }
+    public class AdditionalOptionsModel : SimpleLineItemModel
+    {
+        public AdditionalOptionsModel() : base()
+        {
+            DisplayName = "Zusätzliche Konfiguration";
+        }
+    }
 }

@@ -69,14 +69,9 @@ namespace WpfDemoApp
         private void CreateModularItems()
         {
             ModularItems = new ObservableCollection<IViewItemDescriptor>();
-            var welcomeItem = new ViewItemDescriptor<SimpleLineItemModel, SimpleLineItem>();
-            welcomeItem.ViewModel.DisplayName = "Willkommen!";
-            ModularItems.Add(welcomeItem);
-            var userListItem = new ViewItemDescriptor<UserLineItemModel, SimpleUserList>();
-            ModularItems.Add(userListItem);
-            var additionalOptionsItem = new ViewItemDescriptor<SimpleLineItemModel, SimpleLineItem>();
-            additionalOptionsItem.ViewModel.DisplayName = "Zusätzliche Konfiguration";
-            ModularItems.Add(additionalOptionsItem);
+            ModularItems.Add(new ViewItemDescriptor<WelcomeLineModel, SimpleLineItem>());
+            ModularItems.Add(new ViewItemDescriptor<UserLineItemModel, SimpleUserList>());
+            ModularItems.Add(new ViewItemDescriptor<AdditionalOptionsModel, SimpleLineItem>());
         }
 
         // Methoden zur Herstellung von komplexeren Objekten sind meistens eine gute Idee:

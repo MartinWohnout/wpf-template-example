@@ -16,5 +16,7 @@ namespace WpfDemoApp
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public void OnPropertiesChanged() => OnPropertyChanged(null);
     }
 }
