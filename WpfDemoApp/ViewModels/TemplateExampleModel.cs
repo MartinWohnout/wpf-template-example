@@ -8,9 +8,9 @@ using WpfDemoApp.Controls;
 
 namespace WpfDemoApp
 {
-    public class MainViewModel : ViewModelBase
+    public class TemplateExampleModel : ViewModelBase, IExampleModel
     {
-        public MainViewModel()
+        public TemplateExampleModel()
         {
             WelcomeModel = GetWelcomeModel();
             UserListModel = GetUserListModel();
@@ -19,6 +19,9 @@ namespace WpfDemoApp
             CreateLineViewModels();
             CreateModularItems();
         }
+
+        public IExampleModel.ExampleType Type => IExampleModel.ExampleType.Template;
+        public string DisplayName => "Templates";
 
         public TypedLineItemModel WelcomeModel { get; init; }
         public UserLineItemModel UserListModel { get; init; }

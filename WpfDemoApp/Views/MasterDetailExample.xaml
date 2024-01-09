@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="WpfDemoApp.MasterDetailExample"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfDemoApp"
+        mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate x:Key="MasterItemTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="4" Content="{Binding DisplayName, Mode=OneTime}"/>
+                <TextBox
+                    AcceptsTab="True" AcceptsReturn="True"
+                    Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
+                </TextBox>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="DetailItemTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="4" Content="{Binding Parent, Mode=OneTime}"/>
+                <Label Margin="4" Content="{Binding Id, Mode=OneTime}"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="Auto" MinHeight="48" />
+            <RowDefinition Height ="Auto" MinHeight="96" />
+        </Grid.RowDefinitions>
+
+        <ListBox Grid.Row="0"
+                 ItemsSource="{Binding MasterGridItems, Mode=OneTime}"
+                 SelectedItem="{Binding SelectedMasterItem}"
+                 ItemTemplate="{StaticResource MasterItemTemplate}"/>
+
+        <!-- Hier könnte man auch eine UserControl verwenden, steht dann aber vor dem Problem,
+            dass man das Binding der ItemsSource "durchreichen" muss.
+        Optionen in aufsteigender Komplexität (und Anpassbarkeit):
+            * Control, die ein ItemTemplate gestattet, verwenden,
+                ItemTemplate mitgeben (kann man ggf. in ein ResourceDictionary auslagern) - hier gewählt
+            * CustomControl: Ein existierendes Control im Code erweitern
+            * ControlTemplate einer existierenden Control anpassen
+            * UserControl bauen, passende DependencyProperties hinzufügen - das lohnt nur bei signifikanten Anpassungen und ggf.
+                ist es üblicherweise einfacher, das Control als Template mitzugeben (siehe Implementierung der Beispielliste) -->
+        <ItemsControl Grid.Row="1"
+                      ItemsSource="{Binding SelectedMasterItem.DetailItems}"
+                      ItemTemplate="{StaticResource DetailItemTemplate}" />
+    </Grid>
+</UserControl>

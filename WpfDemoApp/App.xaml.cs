@@ -11,8 +11,8 @@ namespace WpfDemoApp
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            var appWnd = new MainWindow();
-            appWnd.DataContext = new MainViewModel();
+            var appWnd = new ExampleList();
+            appWnd.DataContext = new ExampleListModel();
 
             appWnd.Show();
         }
